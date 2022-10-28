@@ -63,3 +63,16 @@ export function pushOnce<T>(iterator: IteratorLike<T>, value: T): Iterator<T> {
 export function pushOnceFn<T>(value: T): (iterator: IteratorLike<T>) => Iterator<T> {
     return iterator => pushOnce(iterator, value);
 }
+
+export function unshiftOnce<T>(iterator: IteratorLike<T>, value: T): Iterator<T> {
+    const it = toIterator(iterator);
+    let next = (): IteratorResult<T> => {
+        next = () => it.next();
+        return {value};
+    };
+    return {next: () => next()};
+}
+
+export function unshiftOnceFn<T>(value: T): (iterator: IteratorLike<T>) => Iterator<T> {
+    return iterator => unshiftOnce(iterator, value);
+}
