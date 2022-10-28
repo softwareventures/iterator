@@ -22,7 +22,8 @@
     "node": "^14 || ^16 || ^18 || >=19"
   },
   "dependencies": {
-    "tslib": "2.4.0"
+    "tslib": "2.4.0",
+    "unknown": "^0.2.5"
   },
   "devDependencies": {
     "@commitlint/cli": "17.1.2",
