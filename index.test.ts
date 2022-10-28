@@ -1,5 +1,5 @@
 import test from "ava";
-import {iterator, tailOnce, toArrayOnce} from "./index";
+import {iterator, pushOnce, tailOnce, toArrayOnce} from "./index";
 
 test("iterator", t => {
     t.true(iterator([]).next().done);
@@ -14,4 +14,9 @@ test("tailOnce", t => {
     t.deepEqual(toArrayOnce(tailOnce(iterator([1, 2, 3, 4]))), [2, 3, 4]);
     t.deepEqual(toArrayOnce(tailOnce(iterator([1]))), []);
     t.deepEqual(toArrayOnce(tailOnce(iterator([]))), []);
+});
+
+test("pushOnce", t => {
+    t.deepEqual(toArrayOnce(pushOnce(iterator([1, 2, 3]), 4)), [1, 2, 3, 4]);
+    t.deepEqual(toArrayOnce(pushOnce(iterator([]), 4)), [4]);
 });

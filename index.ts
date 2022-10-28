@@ -45,3 +45,21 @@ export function tailOnce<T>(iterator: IteratorLike<T>): Iterator<T> {
     it.next();
     return it;
 }
+
+export function pushOnce<T>(iterator: IteratorLike<T>, value: T): Iterator<T> {
+    const it = toIterator(iterator);
+    let next = (): IteratorResult<T> => {
+        const element = it.next();
+        if (element.done === true) {
+            next = () => ({done: true, value: undefined});
+            return {value};
+        } else {
+            return element;
+        }
+    };
+    return {next: () => next()};
+}
+
+export function pushOnceFn<T>(value: T): (iterator: IteratorLike<T>) => Iterator<T> {
+    return iterator => pushOnce(iterator, value);
+}
