@@ -39,3 +39,9 @@ export function firstOnce<T>(iterator: IteratorLike<T>): T | null {
         return element.value;
     }
 }
+
+export function tailOnce<T>(iterator: IteratorLike<T>): Iterator<T> {
+    const it = toIterator(iterator);
+    it.next();
+    return it;
+}
