@@ -29,3 +29,13 @@ export function toSetOnce<T>(iterator: IteratorLike<T>): Set<T> {
     }
     return set;
 }
+
+export function firstOnce<T>(iterator: IteratorLike<T>): T | null {
+    const it = toIterator(iterator);
+    const element = it.next();
+    if (element.done === true) {
+        return null;
+    } else {
+        return element.value;
+    }
+}
