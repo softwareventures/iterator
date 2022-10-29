@@ -1,5 +1,13 @@
 import test from "ava";
-import {initialOnce, iterator, pushOnce, tailOnce, toArrayOnce, unshiftOnce} from "./index";
+import {
+    initialOnce,
+    iterator,
+    lastOnce,
+    pushOnce,
+    tailOnce,
+    toArrayOnce,
+    unshiftOnce
+} from "./index";
 
 test("iterator", t => {
     t.true(iterator([]).next().done);
@@ -30,4 +38,9 @@ test("initialOnce", t => {
     t.deepEqual(toArrayOnce(initialOnce(iterator([1, 2, 3, 4]))), [1, 2, 3]);
     t.deepEqual(toArrayOnce(initialOnce(iterator([1]))), []);
     t.deepEqual(toArrayOnce(initialOnce(iterator([]))), []);
+});
+
+test("lastOnce", t => {
+    t.is(lastOnce(iterator([])), null);
+    t.is(lastOnce(iterator([1, 2, 3])), 3);
 });

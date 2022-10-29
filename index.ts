@@ -93,3 +93,17 @@ export function initialOnce<T>(iterator: IteratorLike<T>): Iterator<T> {
         }
     };
 }
+
+export function lastOnce<T>(iterator: IteratorLike<T>): T | null {
+    const it = toIterator(iterator);
+    let last = it.next();
+    if (last.done === true) {
+        return null;
+    }
+    let element = it.next();
+    while (element.done !== true) {
+        last = element;
+        element = it.next();
+    }
+    return last.value;
+}
