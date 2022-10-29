@@ -76,3 +76,20 @@ export function unshiftOnce<T>(iterator: IteratorLike<T>, value: T): Iterator<T>
 export function unshiftOnceFn<T>(value: T): (iterator: IteratorLike<T>) => Iterator<T> {
     return iterator => unshiftOnce(iterator, value);
 }
+
+export function initialOnce<T>(iterator: IteratorLike<T>): Iterator<T> {
+    const it = toIterator(iterator);
+    let prev = it.next();
+    return {
+        next: () => {
+            const element = it.next();
+            if (element.done === true) {
+                return element;
+            } else {
+                const result = prev;
+                prev = element;
+                return result;
+            }
+        }
+    };
+}
