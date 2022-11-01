@@ -1,5 +1,6 @@
 import test from "ava";
 import {
+    dropOnce,
     emptyOnce,
     initialOnce,
     iterator,
@@ -83,4 +84,11 @@ test("takeOnce", t => {
     t.deepEqual(toArrayOnce(takeOnce(iterator([1, 2]), 3)), [1, 2]);
     t.deepEqual(toArrayOnce(takeOnce(iterator([1, 2, 3, 4, 5]), 3)), [1, 2, 3]);
     t.deepEqual(toArrayOnce(takeOnce(iterator([1, 2, 3, 4, 5]), 0)), []);
+});
+
+test("dropOnce", t => {
+    t.deepEqual(toArrayOnce(dropOnce(iterator([]), 3)), []);
+    t.deepEqual(toArrayOnce(dropOnce(iterator([1, 2]), 3)), []);
+    t.deepEqual(toArrayOnce(dropOnce(iterator([1, 2, 3, 4, 5]), 3)), [4, 5]);
+    t.deepEqual(toArrayOnce(dropOnce(iterator([1, 2, 3, 4, 5]), 0)), [1, 2, 3, 4, 5]);
 });

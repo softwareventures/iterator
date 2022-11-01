@@ -190,3 +190,24 @@ export function takeOnce<T>(iterator: IteratorLike<T>, count: number): Iterator<
 export function takeOnceFn<T>(count: number): (iterator: IteratorLike<T>) => Iterator<T> {
     return iterator => takeOnce(iterator, count);
 }
+
+export function dropOnce<T>(iterator: IteratorLike<T>, count: number): Iterator<T> {
+    const it = toIterator(iterator);
+    let i = 0;
+    const before = (): IteratorResult<T> => {
+        let element = it.next();
+        while (i++ < count && element.done !== true) {
+            element = it.next();
+        }
+
+        next = during;
+        return element;
+    };
+    const during = (): IteratorResult<T> => it.next();
+    let next = count <= 0 ? during : before;
+    return {next: () => next()};
+}
+
+export function dropOnceFn<T>(count: number): (iterator: IteratorLike<T>) => Iterator<T> {
+    return iterator => dropOnce(iterator, count);
+}
