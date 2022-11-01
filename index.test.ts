@@ -4,6 +4,7 @@ import {
     initialOnce,
     iterator,
     lastOnce,
+    notEmptyOnce,
     onlyOnce,
     pushOnce,
     tailOnce,
@@ -57,4 +58,10 @@ test("emptyOnce", t => {
     t.is(emptyOnce(iterator([])), true);
     t.is(emptyOnce(iterator([1])), false);
     t.is(emptyOnce(iterator([1, 2, 3])), false);
+});
+
+test("notEmptyOnce", t => {
+    t.is(notEmptyOnce(iterator([])), false);
+    t.is(notEmptyOnce(iterator([1])), true);
+    t.is(notEmptyOnce(iterator([1, 2, 3])), true);
 });
