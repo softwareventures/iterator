@@ -168,3 +168,25 @@ export function sliceOnceFn<T>(
 ): (iterator: IteratorLike<T>) => Iterator<T> {
     return iterator => sliceOnce(iterator, start, end);
 }
+
+export function takeOnce<T>(iterator: IteratorLike<T>, count: number): Iterator<T> {
+    const it = toIterator(iterator);
+    let i = 0;
+    const done: IteratorResult<T> = {done: true, value: undefined};
+    const during = (): IteratorResult<T> => {
+        const element = it.next();
+        if (i++ < count && element.done !== true) {
+            return element;
+        } else {
+            next = after;
+            return done;
+        }
+    };
+    const after = (): IteratorResult<T> => done;
+    let next = count <= 0 ? after : during;
+    return {next: () => next()};
+}
+
+export function takeOnceFn<T>(count: number): (iterator: IteratorLike<T>) => Iterator<T> {
+    return iterator => takeOnce(iterator, count);
+}

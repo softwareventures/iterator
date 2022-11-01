@@ -9,6 +9,7 @@ import {
     pushOnce,
     sliceOnce,
     tailOnce,
+    takeOnce,
     toArrayOnce,
     unshiftOnce
 } from "./index";
@@ -75,4 +76,11 @@ test("sliceOnce", t => {
     t.deepEqual(toArrayOnce(sliceOnce(iterator([]), 3, 5)), []);
     t.deepEqual(toArrayOnce(sliceOnce(iterator([1, 2, 3]), 2, 0)), []);
     t.deepEqual(toArrayOnce(sliceOnce(iterator([1, 2, 3]), 1, 1)), []);
+});
+
+test("takeOnce", t => {
+    t.deepEqual(toArrayOnce(takeOnce(iterator([]), 3)), []);
+    t.deepEqual(toArrayOnce(takeOnce(iterator([1, 2]), 3)), [1, 2]);
+    t.deepEqual(toArrayOnce(takeOnce(iterator([1, 2, 3, 4, 5]), 3)), [1, 2, 3]);
+    t.deepEqual(toArrayOnce(takeOnce(iterator([1, 2, 3, 4, 5]), 0)), []);
 });
