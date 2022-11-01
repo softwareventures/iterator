@@ -7,6 +7,7 @@ import {
     notEmptyOnce,
     onlyOnce,
     pushOnce,
+    sliceOnce,
     tailOnce,
     toArrayOnce,
     unshiftOnce
@@ -64,4 +65,14 @@ test("notEmptyOnce", t => {
     t.is(notEmptyOnce(iterator([])), false);
     t.is(notEmptyOnce(iterator([1])), true);
     t.is(notEmptyOnce(iterator([1, 2, 3])), true);
+});
+
+test("sliceOnce", t => {
+    t.deepEqual(toArrayOnce(sliceOnce(iterator([1, 2, 3, 4]), 1)), [2, 3, 4]);
+    t.deepEqual(toArrayOnce(sliceOnce(iterator([1, 2, 3, 4, 5]), 1, 4)), [2, 3, 4]);
+    t.deepEqual(toArrayOnce(sliceOnce(iterator([1, 2, 3]), 2)), [3]);
+    t.deepEqual(toArrayOnce(sliceOnce(iterator([1, 2, 3]), 0, 2)), [1, 2]);
+    t.deepEqual(toArrayOnce(sliceOnce(iterator([]), 3, 5)), []);
+    t.deepEqual(toArrayOnce(sliceOnce(iterator([1, 2, 3]), 2, 0)), []);
+    t.deepEqual(toArrayOnce(sliceOnce(iterator([1, 2, 3]), 1, 1)), []);
 });

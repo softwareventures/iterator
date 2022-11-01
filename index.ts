@@ -129,3 +129,42 @@ export function emptyOnce<T>(iterator: IteratorLike<T>): boolean {
 export function notEmptyOnce<T>(iterator: IteratorLike<T>): boolean {
     return !emptyOnce(iterator);
 }
+
+export function sliceOnce<T>(iterator: IteratorLike<T>, start = 0, end = Infinity): Iterator<T> {
+    const it = toIterator(iterator);
+    let i = 0;
+    const done: IteratorResult<T> = {done: true, value: undefined};
+    const before = (): IteratorResult<T> => {
+        let element = it.next();
+        while (i++ < start && element.done !== true) {
+            element = it.next();
+        }
+
+        if (element.done === true) {
+            next = after;
+            return done;
+        } else {
+            next = during;
+            return element;
+        }
+    };
+    const during = (): IteratorResult<T> => {
+        const element = it.next();
+        if (i++ < end && element.done !== true) {
+            return element;
+        } else {
+            next = after;
+            return done;
+        }
+    };
+    const after = (): IteratorResult<T> => done;
+    let next = end <= start ? after : before;
+    return {next: () => next()};
+}
+
+export function sliceOnceFn<T>(
+    start: number,
+    end = Infinity
+): (iterator: IteratorLike<T>) => Iterator<T> {
+    return iterator => sliceOnce(iterator, start, end);
+}
