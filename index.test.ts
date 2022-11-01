@@ -1,5 +1,6 @@
 import test from "ava";
 import {
+    emptyOnce,
     initialOnce,
     iterator,
     lastOnce,
@@ -50,4 +51,10 @@ test("onlyOnce", t => {
     t.is(onlyOnce(iterator([])), null);
     t.is(onlyOnce(iterator([4])), 4);
     t.is(onlyOnce(iterator([3, 4, 5])), null);
+});
+
+test("emptyOnce", t => {
+    t.is(emptyOnce(iterator([])), true);
+    t.is(emptyOnce(iterator([1])), false);
+    t.is(emptyOnce(iterator([1, 2, 3])), false);
 });

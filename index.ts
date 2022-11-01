@@ -121,3 +121,7 @@ export function onlyOnce<T>(iterator: IteratorLike<T>): T | null {
         return null;
     }
 }
+
+export function emptyOnce<T>(iterator: IteratorLike<T>): boolean {
+    return toIterator(iterator).next().done === true;
+}
