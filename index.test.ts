@@ -3,6 +3,7 @@ import {
     initialOnce,
     iterator,
     lastOnce,
+    onlyOnce,
     pushOnce,
     tailOnce,
     toArrayOnce,
@@ -43,4 +44,10 @@ test("initialOnce", t => {
 test("lastOnce", t => {
     t.is(lastOnce(iterator([])), null);
     t.is(lastOnce(iterator([1, 2, 3])), 3);
+});
+
+test("onlyOnce", t => {
+    t.is(onlyOnce(iterator([])), null);
+    t.is(onlyOnce(iterator([4])), 4);
+    t.is(onlyOnce(iterator([3, 4, 5])), null);
 });

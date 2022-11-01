@@ -107,3 +107,17 @@ export function lastOnce<T>(iterator: IteratorLike<T>): T | null {
     }
     return last.value;
 }
+
+export function onlyOnce<T>(iterator: IteratorLike<T>): T | null {
+    const it = toIterator(iterator);
+    const first = it.next();
+    if (first.done === true) {
+        return null;
+    }
+    const second = it.next();
+    if (second.done === true) {
+        return first.value;
+    } else {
+        return null;
+    }
+}
