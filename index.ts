@@ -1,5 +1,6 @@
 import {equal as defaultEqual} from "@softwareventures/ordered";
 import {hasProperty} from "unknown";
+import {isNotNull} from "@softwareventures/nullable";
 
 export type IteratorLike<T> = Iterator<T> | Iterable<T>;
 
@@ -475,4 +476,8 @@ export function excludeOnceFn<T>(
     predicate: (element: T, index: number) => boolean
 ): (iterator: IteratorLike<T>) => Iterator<T> {
     return iterator => filterOnce(iterator, (element, index) => !predicate(element, index));
+}
+
+export function excludeNullOnce<T>(iterator: IteratorLike<T | null | undefined>): Iterator<T> {
+    return filterOnce(iterator, isNotNull);
 }

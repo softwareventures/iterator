@@ -861,6 +861,7 @@ __metadata:
     "@commitlint/config-conventional": 17.1.0
     "@commitlint/cz-commitlint": 17.1.2
     "@softwareventures/eslint-config": 7.0.0
+    "@softwareventures/nullable": ^3.0.0
     "@softwareventures/ordered": ^2.0.0
     "@softwareventures/precise-commits": 2.0.22
     "@softwareventures/prettier-config": 3.0.0
@@ -895,6 +896,15 @@ __metadata:
   dependencies:
     tslib: 2.3.0
   checksum: cdfe2d5cd35e6eb878cdcdcf8626d02f38a152f5529bce6b473d20bbded5ba5e16e851016de17dcc4fcec6fa1430032b8b1e4345504caa09ed178ce7c1733d90
+  languageName: node
+  linkType: hard
+
+"@softwareventures/nullable@npm:^3.0.0":
+  version: 3.0.0
+  resolution: "@softwareventures/nullable@npm:3.0.0"
+  dependencies:
+    tslib: 2.4.0
+  checksum: 19775dce03995984daef0a8c6b81b4e9f8f9ab770d6b09d815968b9ac2be368a2f144aa68201b002652880ce3587de3a8267f457882682abe8e34629745f2df8
   languageName: node
   linkType: hard
 
