@@ -522,3 +522,26 @@ export function removeFirstOnce<T>(iterator: IteratorLike<T>, value: T): Iterato
 export function removeFirstOnceFn<T>(value: T): (iterator: IteratorLike<T>) => Iterator<T> {
     return iterator => removeFirstOnce(iterator, value);
 }
+
+export function foldOnce<T, U>(
+    iterator: IteratorLike<T>,
+    f: (accumulator: U, element: T, index: number) => U,
+    initial: U
+): U {
+    const it = toIterator(iterator);
+    let element = it.next();
+    let accumulator = initial;
+    let i = 0;
+    while (element.done !== true) {
+        accumulator = f(accumulator, element.value, i++);
+        element = it.next();
+    }
+    return accumulator;
+}
+
+export function foldOnceFn<T, U>(
+    f: (accumulator: U, element: T, index: number) => U,
+    initial: U
+): (iterator: IteratorLike<T>) => U {
+    return iterator => foldOnce(iterator, f, initial);
+}

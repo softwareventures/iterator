@@ -9,6 +9,7 @@ import {
     excludeNullOnce,
     excludeOnce,
     filterOnce,
+    foldOnce,
     initialOnce,
     iterator,
     lastOnce,
@@ -238,5 +239,12 @@ test("removeFirstOnce", t => {
     t.deepEqual(
         toArrayOnce(removeFirstOnce(iterator([1, 2, 3, 4, 3, 2, 1]), 3)),
         [1, 2, 4, 3, 2, 1]
+    );
+});
+
+test("foldOnce", t => {
+    t.is(
+        foldOnce(iterator([1, 2, 3]), (a, e, i) => a + e * i, 0),
+        8
     );
 });
