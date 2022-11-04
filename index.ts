@@ -514,3 +514,11 @@ export function removeOnce<T>(iterator: IteratorLike<T>, value: T): Iterator<T> 
 export function removeOnceFn<T>(value: T): (iterator: IteratorLike<T>) => Iterator<T> {
     return iterator => removeOnce(iterator, value);
 }
+
+export function removeFirstOnce<T>(iterator: IteratorLike<T>, value: T): Iterator<T> {
+    return excludeFirstOnce(iterator, element => element === value);
+}
+
+export function removeFirstOnceFn<T>(value: T): (iterator: IteratorLike<T>) => Iterator<T> {
+    return iterator => removeFirstOnce(iterator, value);
+}
