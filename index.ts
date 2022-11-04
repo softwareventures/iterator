@@ -463,3 +463,16 @@ export function filterOnceFn<T>(
 ): (iterator: IteratorLike<T>) => Iterator<T> {
     return iterator => filterOnce(iterator, predicate);
 }
+
+export function excludeOnce<T>(
+    iterator: IteratorLike<T>,
+    predicate: (element: T, index: number) => boolean
+): Iterator<T> {
+    return filterOnce(iterator, (element, index) => !predicate(element, index));
+}
+
+export function excludeOnceFn<T>(
+    predicate: (element: T, index: number) => boolean
+): (iterator: IteratorLike<T>) => Iterator<T> {
+    return iterator => filterOnce(iterator, (element, index) => !predicate(element, index));
+}
