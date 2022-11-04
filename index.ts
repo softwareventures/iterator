@@ -426,3 +426,40 @@ export function mapOnceFn<T, U>(
 ): (iterator: IteratorLike<T>) => Iterator<U> {
     return iterator => mapOnce(iterator, f);
 }
+
+export function filterOnce<T, U extends T>(
+    iterator: IteratorLike<T>,
+    predicate: (element: T, index: number) => element is U
+): Iterator<U>;
+export function filterOnce<T>(
+    iterator: IteratorLike<T>,
+    predicate: (element: T, index: number) => boolean
+): Iterator<T>;
+export function filterOnce<T>(
+    iterator: IteratorLike<T>,
+    predicate: (element: T, index: number) => boolean
+): Iterator<T> {
+    const it = toIterator(iterator);
+    let i = 0;
+    return {
+        next: () => {
+            let element = it.next();
+            while (element.done !== true && !predicate(element.value, i++)) {
+                element = it.next();
+            }
+            return element;
+        }
+    };
+}
+
+export function filterOnceFn<T, U extends T>(
+    predicate: (element: T, index: number) => element is U
+): (iterator: IteratorLike<T>) => Iterator<U>;
+export function filterOnceFn<T>(
+    predicate: (element: T, index: number) => boolean
+): (iterator: IteratorLike<T>) => Iterator<T>;
+export function filterOnceFn<T>(
+    predicate: (element: T, index: number) => boolean
+): (iterator: IteratorLike<T>) => Iterator<T> {
+    return iterator => filterOnce(iterator, predicate);
+}
