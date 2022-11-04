@@ -11,6 +11,7 @@ import {
     filterOnce,
     fold1Once,
     foldOnce,
+    indexOnce,
     initialOnce,
     iterator,
     lastOnce,
@@ -255,4 +256,9 @@ test("fold1Once", t => {
         fold1Once(iterator([1, 2, 3]), (a, e, i) => a + e * i),
         9
     );
+});
+
+test("indexOnce", t => {
+    t.is(indexOnce(iterator([1, 2, 3, 4, 3, 2, 1]), 2), 3);
+    t.is(indexOnce(iterator([1, 2, 3, 4, 3, 2, 1]), 7), null);
 });

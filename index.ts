@@ -569,3 +569,25 @@ export function fold1OnceFn<T>(
 ): (iterator: IteratorLike<T>) => T {
     return iterator => fold1Once(iterator, f);
 }
+
+export function indexOnce<T>(iterator: IteratorLike<T>, index: number): T | null {
+    if (index < 0 || !isFinite(index) || Math.floor(index) !== index) {
+        throw new RangeError("illegal index");
+    }
+
+    const it = toIterator(iterator);
+    let element = it.next();
+    for (let i = 0; element.done !== true && i < index; ++i) {
+        element = it.next();
+    }
+
+    if (element.done === true) {
+        return null;
+    } else {
+        return element.value;
+    }
+}
+
+export function indexOnceFn<T>(index: number): (iterator: IteratorLike<T>) => T | null {
+    return iterator => indexOnce(iterator, index);
+}
