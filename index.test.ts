@@ -9,6 +9,7 @@ import {
     iterator,
     lastOnce,
     notEmptyOnce,
+    notEqualOnce,
     onlyOnce,
     pushOnce,
     sliceOnce,
@@ -156,6 +157,26 @@ test("equalOnce", t => {
     );
     t.false(
         equalOnce(
+            iterator([iterator([1, 2]), iterator([3, 4])]),
+            iterator([iterator([1, 2]), iterator([3, 4])])
+        )
+    );
+});
+
+test("notEqualOnce", t => {
+    t.false(notEqualOnce(iterator([1, 2, 3]), iterator([1, 2, 3])));
+    t.true(notEqualOnce(iterator([1, 2, 3]), iterator([1, 2, 3, 4])));
+    t.true(notEqualOnce(iterator([1, 2, 3, 4]), iterator([1, 2, 3])));
+    t.true(notEqualOnce(iterator([1, 3, 3]), iterator([1, 2, 3])));
+    t.false(
+        notEqualOnce(
+            iterator([iterator([1, 2]), iterator([3, 4])]),
+            iterator([iterator([1, 2]), iterator([3, 4])]),
+            equalOnce
+        )
+    );
+    t.true(
+        notEqualOnce(
             iterator([iterator([1, 2]), iterator([3, 4])]),
             iterator([iterator([1, 2]), iterator([3, 4])])
         )

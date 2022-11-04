@@ -357,3 +357,18 @@ export function equalOnceFn<T>(
 ): (a: IteratorLike<T>) => boolean {
     return a => equalOnce(a, b, elementsEqual);
 }
+
+export function notEqualOnce<T>(
+    a: IteratorLike<T>,
+    b: IteratorLike<T>,
+    elementsEqual: (a: T, b: T) => boolean = defaultEqual
+): boolean {
+    return !equalOnce(a, b, elementsEqual);
+}
+
+export function notEqualOnceFn<T>(
+    b: IteratorLike<T>,
+    elementsEqual: (a: T, b: T) => boolean = defaultEqual
+): (a: IteratorLike<T>) => boolean {
+    return a => !equalOnce(a, b, elementsEqual);
+}
