@@ -12,6 +12,7 @@ import {
     filterOnce,
     fold1Once,
     foldOnce,
+    indexOfOnce,
     indexOnce,
     initialOnce,
     iterator,
@@ -267,4 +268,9 @@ test("indexOnce", t => {
 test("containsOnce", t => {
     t.true(containsOnce(iterator([1, 2, 3]), 1));
     t.false(containsOnce(iterator([1, 2, 3]), 0));
+});
+
+test("indexOfOnce", t => {
+    t.is(indexOfOnce(iterator([1, 2, 3, 4, 3, 2, 1]), 3), 2);
+    t.is(indexOfOnce(iterator([1, 2, 3, 4, 3, 2, 1]), 5), null);
 });
