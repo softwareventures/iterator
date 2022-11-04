@@ -11,6 +11,7 @@ import {
     sliceOnce,
     tailOnce,
     takeOnce,
+    takeUntilOnce,
     takeWhileOnce,
     toArrayOnce,
     unshiftOnce
@@ -100,4 +101,15 @@ test("takeWhileOnce", t => {
     t.deepEqual(toArrayOnce(takeWhileOnce(iterator([1, 2, 3, 4, 5]), (_, i) => i < 3)), [1, 2, 3]);
     t.deepEqual(toArrayOnce(takeWhileOnce(iterator([1, 2, 3, 4, 5]), () => false)), []);
     t.deepEqual(toArrayOnce(takeWhileOnce(iterator([1, 2, 3, 4, 3, 2, 1]), e => e < 4)), [1, 2, 3]);
+});
+
+test("takeUntilOnce", t => {
+    t.deepEqual(toArrayOnce(takeUntilOnce(iterator([]), (_, i) => i >= 3)), []);
+    t.deepEqual(toArrayOnce(takeUntilOnce(iterator([1, 2]), (_, i) => i >= 3)), [1, 2]);
+    t.deepEqual(toArrayOnce(takeUntilOnce(iterator([1, 2, 3, 4, 5]), (_, i) => i >= 3)), [1, 2, 3]);
+    t.deepEqual(toArrayOnce(takeUntilOnce(iterator([1, 2, 3, 4, 5]), () => true)), []);
+    t.deepEqual(
+        toArrayOnce(takeUntilOnce(iterator([1, 2, 3, 4, 3, 2, 1]), e => e >= 4)),
+        [1, 2, 3]
+    );
 });
