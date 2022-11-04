@@ -481,3 +481,28 @@ export function excludeOnceFn<T>(
 export function excludeNullOnce<T>(iterator: IteratorLike<T | null | undefined>): Iterator<T> {
     return filterOnce(iterator, isNotNull);
 }
+
+export function excludeFirstOnce<T>(
+    iterator: IteratorLike<T>,
+    predicate: (element: T, index: number) => boolean
+): Iterator<T> {
+    const it = toIterator(iterator);
+    let i = 0;
+    const before = (): IteratorResult<T> => {
+        const element = it.next();
+        if (element.done !== true && !predicate(element.value, i++)) {
+            return element;
+        }
+        next = after;
+        return it.next();
+    };
+    const after = (): IteratorResult<T> => it.next();
+    let next = before;
+    return {next: () => next()};
+}
+
+export function excludeFirstOnceFn<T>(
+    predicate: (element: T, index: number) => boolean
+): (iterator: IteratorLike<T>) => Iterator<T> {
+    return iterator => excludeFirstOnce(iterator, predicate);
+}

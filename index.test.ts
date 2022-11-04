@@ -5,6 +5,7 @@ import {
     dropWhileOnce,
     emptyOnce,
     equalOnce,
+    excludeFirstOnce,
     excludeNullOnce,
     excludeOnce,
     filterOnce,
@@ -218,4 +219,11 @@ test("excludeOnce", t => {
 
 test("excludeNullOnce", t => {
     t.deepEqual(toArrayOnce(excludeNullOnce(iterator(["a", null, "b"]))), ["a", "b"]);
+});
+
+test("excludeFirstOnce", t => {
+    t.deepEqual(
+        toArrayOnce(excludeFirstOnce(iterator([1, 2, 3, 4, 3, 2, 1]), n => n > 2)),
+        [1, 2, 4, 3, 2, 1]
+    );
 });
