@@ -4,6 +4,7 @@ import {
     dropUntilOnce,
     dropWhileOnce,
     emptyOnce,
+    equalOnce,
     initialOnce,
     iterator,
     lastOnce,
@@ -138,5 +139,25 @@ test("dropUntilOnce", t => {
     t.deepEqual(
         toArrayOnce(dropUntilOnce(iterator([1, 2, 3, 4, 3, 2, 1]), e => e >= 4)),
         [4, 3, 2, 1]
+    );
+});
+
+test("equalOnce", t => {
+    t.true(equalOnce(iterator([1, 2, 3]), iterator([1, 2, 3])));
+    t.false(equalOnce(iterator([1, 2, 3]), iterator([1, 2, 3, 4])));
+    t.false(equalOnce(iterator([1, 2, 3, 4]), iterator([1, 2, 3])));
+    t.false(equalOnce(iterator([1, 3, 3]), iterator([1, 2, 3])));
+    t.true(
+        equalOnce(
+            iterator([iterator([1, 2]), iterator([3, 4])]),
+            iterator([iterator([1, 2]), iterator([3, 4])]),
+            equalOnce
+        )
+    );
+    t.false(
+        equalOnce(
+            iterator([iterator([1, 2]), iterator([3, 4])]),
+            iterator([iterator([1, 2]), iterator([3, 4])])
+        )
     );
 });

@@ -1,3 +1,4 @@
+import {equal as defaultEqual} from "@softwareventures/ordered";
 import {hasProperty} from "unknown";
 
 export type IteratorLike<T> = Iterator<T> | Iterable<T>;
@@ -328,4 +329,31 @@ export function dropUntilOnceFn<T>(
     predicate: (element: T, index: number) => boolean
 ): (iterator: IteratorLike<T>) => Iterator<T> {
     return iterator => dropUntilOnce(iterator, predicate);
+}
+
+export function equalOnce<T>(
+    a: IteratorLike<T>,
+    b: IteratorLike<T>,
+    elementsEqual: (a: T, b: T) => boolean = defaultEqual
+): boolean {
+    const ait = toIterator(a);
+    const bit = toIterator(b);
+    let aElement = ait.next();
+    let bElement = bit.next();
+    while (
+        aElement.done !== true &&
+        bElement.done !== true &&
+        elementsEqual(aElement.value, bElement.value)
+    ) {
+        aElement = ait.next();
+        bElement = bit.next();
+    }
+    return aElement.done === true && bElement.done === true;
+}
+
+export function equalOnceFn<T>(
+    b: IteratorLike<T>,
+    elementsEqual: (a: T, b: T) => boolean = defaultEqual
+): (a: IteratorLike<T>) => boolean {
+    return a => equalOnce(a, b, elementsEqual);
 }
