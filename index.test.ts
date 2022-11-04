@@ -8,6 +8,7 @@ import {
     initialOnce,
     iterator,
     lastOnce,
+    mapOnce,
     notEmptyOnce,
     notEqualOnce,
     onlyOnce,
@@ -190,4 +191,12 @@ test("prefixMatchOnce", t => {
     t.true(prefixMatchOnce(iterator([1, 2, 3, 4]), iterator([1, 2])));
     t.false(prefixMatchOnce(iterator([1, 3, 4]), iterator([1, 2])));
     t.false(prefixMatchOnce(iterator([]), iterator([1])));
+});
+
+test("mapOnce", t => {
+    t.deepEqual(toArrayOnce(mapOnce(iterator([1, 2, 3]), e => e + 1)), [2, 3, 4]);
+    t.deepEqual(
+        toArrayOnce(mapOnce(iterator([1, 2, 3]), (e, i) => (i === 1 ? e * 10 : e))),
+        [1, 20, 3]
+    );
 });

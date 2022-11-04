@@ -399,3 +399,30 @@ export function prefixMatchOnceFn<T>(
 ): (a: IteratorLike<T>) => boolean {
     return a => prefixMatchOnce(a, b, elementsEqual);
 }
+
+export function mapOnce<T, U>(
+    iterator: IteratorLike<T>,
+    f: (element: T, index: number) => U
+): Iterator<U> {
+    const it = toIterator(iterator);
+    let i = 0;
+    const done: IteratorResult<U> = {done: true, value: undefined};
+    const during = (): IteratorResult<U> => {
+        const element = it.next();
+        if (element.done === true) {
+            next = after;
+            return done;
+        } else {
+            return {value: f(element.value, i++)};
+        }
+    };
+    const after = (): IteratorResult<U> => done;
+    let next = during;
+    return {next: () => next()};
+}
+
+export function mapOnceFn<T, U>(
+    f: (element: T, index: number) => U
+): (iterator: IteratorLike<T>) => Iterator<U> {
+    return iterator => mapOnce(iterator, f);
+}
