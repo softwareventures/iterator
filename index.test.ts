@@ -11,6 +11,7 @@ import {
     sliceOnce,
     tailOnce,
     takeOnce,
+    takeWhileOnce,
     toArrayOnce,
     unshiftOnce
 } from "./index";
@@ -91,4 +92,12 @@ test("dropOnce", t => {
     t.deepEqual(toArrayOnce(dropOnce(iterator([1, 2]), 3)), []);
     t.deepEqual(toArrayOnce(dropOnce(iterator([1, 2, 3, 4, 5]), 3)), [4, 5]);
     t.deepEqual(toArrayOnce(dropOnce(iterator([1, 2, 3, 4, 5]), 0)), [1, 2, 3, 4, 5]);
+});
+
+test("takeWhileOnce", t => {
+    t.deepEqual(toArrayOnce(takeWhileOnce(iterator([]), (_, i) => i < 3)), []);
+    t.deepEqual(toArrayOnce(takeWhileOnce(iterator([1, 2]), (_, i) => i < 3)), [1, 2]);
+    t.deepEqual(toArrayOnce(takeWhileOnce(iterator([1, 2, 3, 4, 5]), (_, i) => i < 3)), [1, 2, 3]);
+    t.deepEqual(toArrayOnce(takeWhileOnce(iterator([1, 2, 3, 4, 5]), () => false)), []);
+    t.deepEqual(toArrayOnce(takeWhileOnce(iterator([1, 2, 3, 4, 3, 2, 1]), e => e < 4)), [1, 2, 3]);
 });

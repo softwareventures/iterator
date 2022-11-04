@@ -211,3 +211,44 @@ export function dropOnce<T>(iterator: IteratorLike<T>, count: number): Iterator<
 export function dropOnceFn<T>(count: number): (iterator: IteratorLike<T>) => Iterator<T> {
     return iterator => dropOnce(iterator, count);
 }
+
+export function takeWhileOnce<T, U extends T>(
+    iterator: IteratorLike<T>,
+    predicate: (element: T, index: number) => element is U
+): Iterator<U>;
+export function takeWhileOnce<T>(
+    iterator: IteratorLike<T>,
+    predicate: (element: T, index: number) => boolean
+): Iterator<T>;
+export function takeWhileOnce<T>(
+    iterator: IteratorLike<T>,
+    predicate: (element: T, index: number) => boolean
+): Iterator<T> {
+    const it = toIterator(iterator);
+    let i = 0;
+    const done: IteratorResult<T> = {done: true, value: undefined};
+    const during = (): IteratorResult<T> => {
+        const element = it.next();
+        if (element.done !== true && predicate(element.value, i++)) {
+            return element;
+        } else {
+            next = after;
+            return done;
+        }
+    };
+    const after = (): IteratorResult<T> => done;
+    let next = during;
+    return {next: () => next()};
+}
+
+export function takeWhileOnceFn<T, U extends T>(
+    predicate: (element: T, index: number) => element is U
+): (iterator: IteratorLike<T>) => Iterator<U>;
+export function takeWhileOnceFn<T>(
+    predicate: (element: T, index: number) => boolean
+): (iterator: IteratorLike<T>) => Iterator<T>;
+export function takeWhileOnceFn<T>(
+    predicate: (element: T, index: number) => boolean
+): (iterator: IteratorLike<T>) => Iterator<T> {
+    return iterator => takeWhileOnce(iterator, predicate);
+}
