@@ -1,6 +1,7 @@
 import test from "ava";
 import {
     dropOnce,
+    dropWhileOnce,
     emptyOnce,
     initialOnce,
     iterator,
@@ -111,5 +112,19 @@ test("takeUntilOnce", t => {
     t.deepEqual(
         toArrayOnce(takeUntilOnce(iterator([1, 2, 3, 4, 3, 2, 1]), e => e >= 4)),
         [1, 2, 3]
+    );
+});
+
+test("dropWhileOnce", t => {
+    t.deepEqual(toArrayOnce(dropWhileOnce(iterator([]), (_, i) => i < 3)), []);
+    t.deepEqual(toArrayOnce(dropWhileOnce(iterator([1, 2]), (_, i) => i < 3)), []);
+    t.deepEqual(toArrayOnce(dropWhileOnce(iterator([1, 2, 3, 4, 5]), (_, i) => i < 3)), [4, 5]);
+    t.deepEqual(
+        toArrayOnce(dropWhileOnce(iterator([1, 2, 3, 4, 5]), () => false)),
+        [1, 2, 3, 4, 5]
+    );
+    t.deepEqual(
+        toArrayOnce(dropWhileOnce(iterator([1, 2, 3, 4, 3, 2, 1]), e => e < 4)),
+        [4, 3, 2, 1]
     );
 });

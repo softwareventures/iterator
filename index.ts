@@ -279,3 +279,28 @@ export function takeUntilOnceFn<T>(
 ): (iterator: IteratorLike<T>) => Iterator<T> {
     return iterator => takeUntilOnce(iterator, predicate);
 }
+
+export function dropWhileOnce<T>(
+    iterator: IteratorLike<T>,
+    predicate: (element: T, index: number) => boolean
+): Iterator<T> {
+    const it = toIterator(iterator);
+    let i = 0;
+    const before = (): IteratorResult<T> => {
+        let element = it.next();
+        while (element.done !== true && predicate(element.value, i++)) {
+            element = it.next();
+        }
+        next = during;
+        return element;
+    };
+    const during = (): IteratorResult<T> => it.next();
+    let next = before;
+    return {next: () => next()};
+}
+
+export function dropWhileOnceFn<T>(
+    predicate: (element: T, index: number) => boolean
+): (iterator: IteratorLike<T>) => Iterator<T> {
+    return iterator => dropWhileOnce(iterator, predicate);
+}
