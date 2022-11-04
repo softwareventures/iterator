@@ -372,3 +372,30 @@ export function notEqualOnceFn<T>(
 ): (a: IteratorLike<T>) => boolean {
     return a => !equalOnce(a, b, elementsEqual);
 }
+
+export function prefixMatchOnce<T>(
+    a: IteratorLike<T>,
+    b: IteratorLike<T>,
+    elementsEqual: (a: T, b: T) => boolean = defaultEqual
+): boolean {
+    const ait = toIterator(a);
+    const bit = toIterator(b);
+    let aElement = ait.next();
+    let bElement = bit.next();
+    while (
+        aElement.done !== true &&
+        bElement.done !== true &&
+        elementsEqual(aElement.value, bElement.value)
+    ) {
+        aElement = ait.next();
+        bElement = bit.next();
+    }
+    return bElement.done === true;
+}
+
+export function prefixMatchOnceFn<T>(
+    b: IteratorLike<T>,
+    elementsEqual: (a: T, b: T) => boolean = defaultEqual
+): (a: IteratorLike<T>) => boolean {
+    return a => prefixMatchOnce(a, b, elementsEqual);
+}

@@ -11,6 +11,7 @@ import {
     notEmptyOnce,
     notEqualOnce,
     onlyOnce,
+    prefixMatchOnce,
     pushOnce,
     sliceOnce,
     tailOnce,
@@ -181,4 +182,12 @@ test("notEqualOnce", t => {
             iterator([iterator([1, 2]), iterator([3, 4])])
         )
     );
+});
+
+test("prefixMatchOnce", t => {
+    t.true(prefixMatchOnce(iterator([]), iterator([])));
+    t.true(prefixMatchOnce(iterator([1, 2, 3]), iterator([])));
+    t.true(prefixMatchOnce(iterator([1, 2, 3, 4]), iterator([1, 2])));
+    t.false(prefixMatchOnce(iterator([1, 3, 4]), iterator([1, 2])));
+    t.false(prefixMatchOnce(iterator([]), iterator([1])));
 });
