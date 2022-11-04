@@ -9,6 +9,7 @@ import {
     excludeNullOnce,
     excludeOnce,
     filterOnce,
+    fold1Once,
     foldOnce,
     initialOnce,
     iterator,
@@ -246,5 +247,12 @@ test("foldOnce", t => {
     t.is(
         foldOnce(iterator([1, 2, 3]), (a, e, i) => a + e * i, 0),
         8
+    );
+});
+
+test("fold1Once", t => {
+    t.is(
+        fold1Once(iterator([1, 2, 3]), (a, e, i) => a + e * i),
+        9
     );
 });

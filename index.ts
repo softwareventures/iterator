@@ -545,3 +545,27 @@ export function foldOnceFn<T, U>(
 ): (iterator: IteratorLike<T>) => U {
     return iterator => foldOnce(iterator, f, initial);
 }
+
+export function fold1Once<T>(
+    iterator: IteratorLike<T>,
+    f: (accumulator: T, element: T, index: number) => T
+): T {
+    const it = toIterator(iterator);
+    const element = it.next();
+
+    if (element.done === true) {
+        throw new TypeError("fold1Once: empty Iterator");
+    }
+
+    return foldOnce(
+        it,
+        (accumulator, element, index) => f(accumulator, element, index + 1),
+        element.value
+    );
+}
+
+export function fold1OnceFn<T>(
+    f: (accumulator: T, element: T, index: number) => T
+): (iterator: IteratorLike<T>) => T {
+    return iterator => fold1Once(iterator, f);
+}
