@@ -18,6 +18,7 @@ import {
     onlyOnce,
     prefixMatchOnce,
     pushOnce,
+    removeOnce,
     sliceOnce,
     tailOnce,
     takeOnce,
@@ -226,4 +227,8 @@ test("excludeFirstOnce", t => {
         toArrayOnce(excludeFirstOnce(iterator([1, 2, 3, 4, 3, 2, 1]), n => n > 2)),
         [1, 2, 4, 3, 2, 1]
     );
+});
+
+test("removeOnce", t => {
+    t.deepEqual(toArrayOnce(removeOnce(iterator([1, 2, 3, 4, 3, 2, 1]), 3)), [1, 2, 4, 2, 1]);
 });
