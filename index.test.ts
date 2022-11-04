@@ -1,5 +1,6 @@
 import test from "ava";
 import {
+    containsOnce,
     dropOnce,
     dropUntilOnce,
     dropWhileOnce,
@@ -261,4 +262,9 @@ test("fold1Once", t => {
 test("indexOnce", t => {
     t.is(indexOnce(iterator([1, 2, 3, 4, 3, 2, 1]), 2), 3);
     t.is(indexOnce(iterator([1, 2, 3, 4, 3, 2, 1]), 7), null);
+});
+
+test("containsOnce", t => {
+    t.true(containsOnce(iterator([1, 2, 3]), 1));
+    t.false(containsOnce(iterator([1, 2, 3]), 0));
 });

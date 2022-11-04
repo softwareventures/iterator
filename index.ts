@@ -591,3 +591,19 @@ export function indexOnce<T>(iterator: IteratorLike<T>, index: number): T | null
 export function indexOnceFn<T>(index: number): (iterator: IteratorLike<T>) => T | null {
     return iterator => indexOnce(iterator, index);
 }
+
+export function containsOnce<T>(iterator: IteratorLike<T>, value: T): boolean {
+    const it = toIterator(iterator);
+    let element = it.next();
+    while (element.done !== true) {
+        if (element.value === value) {
+            return true;
+        }
+        element = it.next();
+    }
+    return false;
+}
+
+export function containsOnceFn<T>(value: T): (iterator: IteratorLike<T>) => boolean {
+    return iterator => containsOnce(iterator, value);
+}
