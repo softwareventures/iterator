@@ -644,3 +644,38 @@ export function findIndexOnceFn<T>(
 ): (iterator: IteratorLike<T>) => number | null {
     return iterator => findIndexOnce(iterator, predicate);
 }
+
+export function findOnce<T, U extends T>(
+    iterator: IteratorLike<T>,
+    predicate: (element: T, index: number) => element is U
+): U | null;
+export function findOnce<T>(
+    iterator: IteratorLike<T>,
+    predicate: (element: T, index: number) => boolean
+): T | null;
+export function findOnce<T>(
+    iterator: IteratorLike<T>,
+    predicate: (element: T, index: number) => boolean
+): T | null {
+    const it = toIterator(iterator);
+    let element = it.next();
+    for (let i = 0; element.done !== true; ++i) {
+        if (predicate(element.value, i)) {
+            return element.value;
+        }
+        element = it.next();
+    }
+    return null;
+}
+
+export function findOnceFn<T, U extends T>(
+    predicate: (element: T, index: number) => element is U
+): (iterator: IteratorLike<T>) => U | null;
+export function findOnceFn<T>(
+    predicate: (element: T, index: number) => boolean
+): (iterator: IteratorLike<T>) => T | null;
+export function findOnceFn<T>(
+    predicate: (element: T, index: number) => boolean
+): (iterator: IteratorLike<T>) => T | null {
+    return iterator => findOnce(iterator, predicate);
+}
