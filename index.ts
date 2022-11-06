@@ -823,3 +823,39 @@ export function allOnceFn<T>(
 ): (iterator: IteratorLike<T>) => boolean {
     return iterator => allOnce(iterator, predicate);
 }
+
+export function concatOnce<T>(iterators: IteratorLike<IteratorLike<T>>): Iterator<T> {
+    const its = toIterator(iterators);
+    const done: IteratorResult<T> = {done: true, value: undefined};
+    const first = (): IteratorResult<T> => {
+        const itElement = its.next();
+        if (itElement.done === true) {
+            next = after;
+            return done;
+        } else {
+            let iterator = toIterator(itElement.value);
+
+            const during = (): IteratorResult<T> => {
+                let element = iterator.next();
+                while (element.done === true) {
+                    const itElement = its.next();
+                    if (itElement.done === true) {
+                        next = after;
+                        return done;
+                    } else {
+                        iterator = toIterator(itElement.value);
+                        element = iterator.next();
+                    }
+                }
+
+                return element;
+            };
+
+            next = during;
+            return during();
+        }
+    };
+    const after = (): IteratorResult<T> => done;
+    let next = first;
+    return {next: () => next()};
+}

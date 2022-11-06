@@ -4,6 +4,7 @@ import {
     andOnce,
     anyOnce,
     averageOnce,
+    concatOnce,
     containsOnce,
     dropOnce,
     dropUntilOnce,
@@ -363,4 +364,14 @@ test("anyOnce", t => {
 test("allOnce", t => {
     t.true(allOnce(iterator([1, 2, 3]), e => e < 4));
     t.false(allOnce(iterator([1, 2, 3]), e => e > 2));
+});
+
+test("concatOnce", t => {
+    t.deepEqual(
+        toArrayOnce(
+            concatOnce(iterator([iterator([1, 2]), iterator([]), iterator([3]), iterator([4, 5])]))
+        ),
+        [1, 2, 3, 4, 5]
+    );
+    t.deepEqual(toArrayOnce(concatOnce(iterator([iterator([]), iterator([])]))), []);
 });
