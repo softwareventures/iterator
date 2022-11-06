@@ -780,3 +780,12 @@ export function sumOnce(iterator: IteratorLike<number>): number {
 export function productOnce(iterator: IteratorLike<number>): number {
     return foldOnce(iterator, (a, e) => a * e, 1);
 }
+
+export function averageOnce(iterator: IteratorLike<number>): number | null {
+    const [sum, count] = foldOnce(
+        iterator,
+        ([sum], element, index) => [sum + element, index + 1],
+        [0, 0]
+    );
+    return count === 0 ? null : sum / count;
+}

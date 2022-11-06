@@ -1,5 +1,6 @@
 import test from "ava";
 import {
+    averageOnce,
     containsOnce,
     dropOnce,
     dropUntilOnce,
@@ -330,4 +331,10 @@ test("productOnce", t => {
     t.is(productOnce(iterator([1, 2, 3])), 6);
     t.is(productOnce(iterator([1, 2, 3, 2])), 12);
     t.is(productOnce(iterator([])), 1);
+});
+
+test("averageOnce", t => {
+    t.is(averageOnce(iterator([1, 2, 3])), 2);
+    t.is(averageOnce(iterator([1, 2, 3, 2])), 2);
+    t.is(averageOnce(iterator([])), null);
 });
