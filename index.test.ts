@@ -32,6 +32,7 @@ import {
     removeFirstOnce,
     removeOnce,
     sliceOnce,
+    sumOnce,
     tailOnce,
     takeOnce,
     takeUntilOnce,
@@ -317,4 +318,9 @@ test("minimumByOnce", t => {
     t.is(minimumByOnce(iterator(["1", "2", "3"]), Number), "1");
     t.is(minimumByOnce(iterator(["2", "3", "4", "1", "2", "3"]), Number), "1");
     t.is(minimumByOnce(iterator([]), Number), null);
+});
+
+test("sumOnce", t => {
+    t.is(sumOnce(iterator([1, 2, 3])), 6);
+    t.is(sumOnce(iterator([])), 0);
 });
