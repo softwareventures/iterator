@@ -20,6 +20,7 @@ import {
     iterator,
     lastOnce,
     mapOnce,
+    maximumByOnce,
     maximumOnce,
     notEmptyOnce,
     notEqualOnce,
@@ -296,4 +297,10 @@ test("maximumOnce", t => {
     t.is(maximumOnce(iterator([1, 2, 3])), 3);
     t.is(maximumOnce(iterator([1, 2, 3, 4, 3, 2, 1])), 4);
     t.is(maximumOnce(iterator([])), null);
+});
+
+test("maximumByOnce", t => {
+    t.is(maximumByOnce(iterator(["1", "2", "3"]), Number), "3");
+    t.is(maximumByOnce(iterator(["1", "2", "3", "4", "3", "2", "1"]), Number), "4");
+    t.is(maximumByOnce(iterator([]), Number), null);
 });

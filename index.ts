@@ -712,3 +712,35 @@ function internalMaximumOnce<T>(iterator: IteratorLike<T>, compare: Comparator<T
 
     return max;
 }
+
+export function maximumByOnce<T>(
+    iterator: IteratorLike<T>,
+    select: (element: T, index: number) => number
+): T | null {
+    const it = toIterator(iterator);
+    let element = it.next();
+
+    if (element.done === true) {
+        return null;
+    }
+
+    let max = element.value;
+    let maxBy = select(element.value, 0);
+    element = it.next();
+    for (let i = 1; element.done !== true; ++i) {
+        const by = select(element.value, i);
+        if (by > maxBy) {
+            max = element.value;
+            maxBy = by;
+        }
+        element = it.next();
+    }
+
+    return max;
+}
+
+export function maximumByOnceFn<T>(
+    select: (element: T, index: number) => number
+): (iterator: IteratorLike<T>) => T | null {
+    return iterator => maximumByOnce(iterator, select);
+}
