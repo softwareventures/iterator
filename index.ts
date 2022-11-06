@@ -797,3 +797,16 @@ export function andOnce(iterator: IteratorLike<boolean>): boolean {
 export function orOnce(iterator: IteratorLike<boolean>): boolean {
     return findIndexOnce(iterator, element => element) != null;
 }
+
+export function anyOnce<T>(
+    iterator: IteratorLike<T>,
+    predicate: (element: T, index: number) => boolean
+): boolean {
+    return findIndexOnce(iterator, predicate) != null;
+}
+
+export function anyOnceFn<T>(
+    predicate: (element: T, index: number) => boolean
+): (iterator: IteratorLike<T>) => boolean {
+    return iterator => anyOnce(iterator, predicate);
+}

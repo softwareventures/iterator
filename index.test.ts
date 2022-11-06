@@ -1,6 +1,7 @@
 import test from "ava";
 import {
     andOnce,
+    anyOnce,
     averageOnce,
     containsOnce,
     dropOnce,
@@ -351,4 +352,9 @@ test("orOnce", t => {
     t.true(orOnce(iterator([true, false, true])));
     t.false(orOnce(iterator([false, false, false])));
     t.false(orOnce(iterator([])));
+});
+
+test("anyOnce", t => {
+    t.true(anyOnce(iterator([1, 2, 3]), e => e > 2));
+    t.false(anyOnce(iterator([1, 2, 3]), e => e > 4));
 });
