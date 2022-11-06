@@ -20,6 +20,7 @@ import {
     iterator,
     lastOnce,
     mapOnce,
+    maximumOnce,
     notEmptyOnce,
     notEqualOnce,
     onlyOnce,
@@ -289,4 +290,10 @@ test("findOnce", t => {
         findOnce(iterator([1, 2, 3, 4, 3, 2, 1]), n => n >= 3),
         3
     );
+});
+
+test("maximumOnce", t => {
+    t.is(maximumOnce(iterator([1, 2, 3])), 3);
+    t.is(maximumOnce(iterator([1, 2, 3, 4, 3, 2, 1])), 4);
+    t.is(maximumOnce(iterator([])), null);
 });

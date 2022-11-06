@@ -1,4 +1,5 @@
-import {equal as defaultEqual} from "@softwareventures/ordered";
+import type {Comparator} from "@softwareventures/ordered";
+import {compare as defaultCompare, equal as defaultEqual} from "@softwareventures/ordered";
 import {hasProperty} from "unknown";
 import {isNotNull} from "@softwareventures/nullable";
 
@@ -678,4 +679,36 @@ export function findOnceFn<T>(
     predicate: (element: T, index: number) => boolean
 ): (iterator: IteratorLike<T>) => T | null {
     return iterator => findOnce(iterator, predicate);
+}
+
+export function maximumOnce<T extends string | number | boolean>(
+    iterator: IteratorLike<T>
+): T | null;
+export function maximumOnce<T>(iterator: IteratorLike<T>, compare: Comparator<T>): T | null;
+export function maximumOnce<T>(iterator: IteratorLike<T>, compare?: Comparator<T>): T | null {
+    return internalMaximumOnce(iterator, compare ?? (defaultCompare as unknown as Comparator<T>));
+}
+
+export function maximumOnceFn<T>(compare: Comparator<T>): (iterator: IteratorLike<T>) => T | null {
+    return iterator => internalMaximumOnce(iterator, compare);
+}
+
+function internalMaximumOnce<T>(iterator: IteratorLike<T>, compare: Comparator<T>): T | null {
+    const it = toIterator(iterator);
+    let element = it.next();
+
+    if (element.done === true) {
+        return null;
+    }
+
+    let max = element.value;
+    element = it.next();
+    while (element.done !== true) {
+        if (compare(element.value, max) > 0) {
+            max = element.value;
+        }
+        element = it.next();
+    }
+
+    return max;
 }
