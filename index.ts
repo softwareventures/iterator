@@ -759,3 +759,16 @@ export function minimumOnce<T>(iterator: IteratorLike<T>, compare?: Comparator<T
 export function minimumOnceFn<T>(compare: Comparator<T>): (iterator: IteratorLike<T>) => T | null {
     return iterator => internalMaximumOnce(iterator, reverse(compare));
 }
+
+export function minimumByOnce<T>(
+    iterator: IteratorLike<T>,
+    select: (element: T, index: number) => number
+): T | null {
+    return maximumByOnce(iterator, (element, index) => -select(element, index));
+}
+
+export function minimumByOnceFn<T>(
+    select: (element: T, index: number) => number
+): (iterator: IteratorLike<T>) => T | null {
+    return iterator => minimumByOnce(iterator, select);
+}

@@ -22,6 +22,7 @@ import {
     mapOnce,
     maximumByOnce,
     maximumOnce,
+    minimumByOnce,
     minimumOnce,
     notEmptyOnce,
     notEqualOnce,
@@ -310,4 +311,10 @@ test("minimumOnce", t => {
     t.is(minimumOnce(iterator([1, 2, 3])), 1);
     t.is(minimumOnce(iterator([2, 3, 4, 1, 2, 3])), 1);
     t.is(minimumOnce(iterator([])), null);
+});
+
+test("minimumByOnce", t => {
+    t.is(minimumByOnce(iterator(["1", "2", "3"]), Number), "1");
+    t.is(minimumByOnce(iterator(["2", "3", "4", "1", "2", "3"]), Number), "1");
+    t.is(minimumByOnce(iterator([]), Number), null);
 });
