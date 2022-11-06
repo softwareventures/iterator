@@ -810,3 +810,16 @@ export function anyOnceFn<T>(
 ): (iterator: IteratorLike<T>) => boolean {
     return iterator => anyOnce(iterator, predicate);
 }
+
+export function allOnce<T>(
+    iterator: IteratorLike<T>,
+    predicate: (element: T, index: number) => boolean
+): boolean {
+    return findIndexOnce(iterator, (element, index) => !predicate(element, index)) == null;
+}
+
+export function allOnceFn<T>(
+    predicate: (element: T, index: number) => boolean
+): (iterator: IteratorLike<T>) => boolean {
+    return iterator => allOnce(iterator, predicate);
+}
