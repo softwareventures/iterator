@@ -29,6 +29,7 @@ import {
     notEmptyOnce,
     notEqualOnce,
     onlyOnce,
+    orOnce,
     prefixMatchOnce,
     productOnce,
     pushOnce,
@@ -344,4 +345,10 @@ test("andOnce", t => {
     t.true(andOnce(iterator([true, true, true])));
     t.false(andOnce(iterator([true, false, true])));
     t.true(andOnce(iterator([])));
+});
+
+test("orOnce", t => {
+    t.true(orOnce(iterator([true, false, true])));
+    t.false(orOnce(iterator([false, false, false])));
+    t.false(orOnce(iterator([])));
 });

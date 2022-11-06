@@ -793,3 +793,7 @@ export function averageOnce(iterator: IteratorLike<number>): number | null {
 export function andOnce(iterator: IteratorLike<boolean>): boolean {
     return findIndexOnce(iterator, element => !element) == null;
 }
+
+export function orOnce(iterator: IteratorLike<boolean>): boolean {
+    return findIndexOnce(iterator, element => element) != null;
+}
