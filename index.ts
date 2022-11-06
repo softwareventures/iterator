@@ -623,3 +623,24 @@ export function indexOfOnce<T>(iterator: IteratorLike<T>, value: T): number | nu
 export function indexOfOnceFn<T>(value: T): (iterator: IteratorLike<T>) => number | null {
     return iterator => indexOfOnce(iterator, value);
 }
+
+export function findIndexOnce<T>(
+    iterator: IteratorLike<T>,
+    predicate: (element: T, index: number) => boolean
+): number | null {
+    const it = toIterator(iterator);
+    let element = it.next();
+    for (let i = 0; element.done !== true; ++i) {
+        if (predicate(element.value, i)) {
+            return i;
+        }
+        element = it.next();
+    }
+    return null;
+}
+
+export function findIndexOnceFn<T>(
+    predicate: (element: T, index: number) => boolean
+): (iterator: IteratorLike<T>) => number | null {
+    return iterator => findIndexOnce(iterator, predicate);
+}

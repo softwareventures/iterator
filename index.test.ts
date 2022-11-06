@@ -10,6 +10,7 @@ import {
     excludeNullOnce,
     excludeOnce,
     filterOnce,
+    findIndexOnce,
     fold1Once,
     foldOnce,
     indexOfOnce,
@@ -273,4 +274,11 @@ test("containsOnce", t => {
 test("indexOfOnce", t => {
     t.is(indexOfOnce(iterator([1, 2, 3, 4, 3, 2, 1]), 3), 2);
     t.is(indexOfOnce(iterator([1, 2, 3, 4, 3, 2, 1]), 5), null);
+});
+
+test("findIndexOnce", t => {
+    t.is(
+        findIndexOnce(iterator([1, 2, 3, 4, 3, 2, 1]), n => n >= 3),
+        2
+    );
 });
