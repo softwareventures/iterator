@@ -28,6 +28,7 @@ import {
     notEqualOnce,
     onlyOnce,
     prefixMatchOnce,
+    productOnce,
     pushOnce,
     removeFirstOnce,
     removeOnce,
@@ -323,4 +324,10 @@ test("minimumByOnce", t => {
 test("sumOnce", t => {
     t.is(sumOnce(iterator([1, 2, 3])), 6);
     t.is(sumOnce(iterator([])), 0);
+});
+
+test("productOnce", t => {
+    t.is(productOnce(iterator([1, 2, 3])), 6);
+    t.is(productOnce(iterator([1, 2, 3, 2])), 12);
+    t.is(productOnce(iterator([])), 1);
 });

@@ -776,3 +776,7 @@ export function minimumByOnceFn<T>(
 export function sumOnce(iterator: IteratorLike<number>): number {
     return foldOnce(iterator, (a, e) => a + e, 0);
 }
+
+export function productOnce(iterator: IteratorLike<number>): number {
+    return foldOnce(iterator, (a, e) => a * e, 1);
+}
