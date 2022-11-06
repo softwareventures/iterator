@@ -1,5 +1,5 @@
 import type {Comparator} from "@softwareventures/ordered";
-import {compare as defaultCompare, equal as defaultEqual} from "@softwareventures/ordered";
+import {compare as defaultCompare, equal as defaultEqual, reverse} from "@softwareventures/ordered";
 import {hasProperty} from "unknown";
 import {isNotNull} from "@softwareventures/nullable";
 
@@ -743,4 +743,19 @@ export function maximumByOnceFn<T>(
     select: (element: T, index: number) => number
 ): (iterator: IteratorLike<T>) => T | null {
     return iterator => maximumByOnce(iterator, select);
+}
+
+export function minimumOnce<T extends string | number | boolean>(
+    iterator: IteratorLike<T>
+): T | null;
+export function minimumOnce<T>(iterator: IteratorLike<T>, compare: Comparator<T>): T | null;
+export function minimumOnce<T>(iterator: IteratorLike<T>, compare?: Comparator<T>): T | null {
+    return internalMaximumOnce(
+        iterator,
+        reverse(compare ?? (defaultCompare as unknown as Comparator<T>))
+    );
+}
+
+export function minimumOnceFn<T>(compare: Comparator<T>): (iterator: IteratorLike<T>) => T | null {
+    return iterator => internalMaximumOnce(iterator, reverse(compare));
 }
