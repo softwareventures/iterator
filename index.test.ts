@@ -1,5 +1,6 @@
 import test from "ava";
 import {
+    andOnce,
     averageOnce,
     containsOnce,
     dropOnce,
@@ -337,4 +338,10 @@ test("averageOnce", t => {
     t.is(averageOnce(iterator([1, 2, 3])), 2);
     t.is(averageOnce(iterator([1, 2, 3, 2])), 2);
     t.is(averageOnce(iterator([])), null);
+});
+
+test("andOnce", t => {
+    t.true(andOnce(iterator([true, true, true])));
+    t.false(andOnce(iterator([true, false, true])));
+    t.true(andOnce(iterator([])));
 });

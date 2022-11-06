@@ -789,3 +789,7 @@ export function averageOnce(iterator: IteratorLike<number>): number | null {
     );
     return count === 0 ? null : sum / count;
 }
+
+export function andOnce(iterator: IteratorLike<boolean>): boolean {
+    return findIndexOnce(iterator, element => !element) == null;
+}
