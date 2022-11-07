@@ -863,3 +863,7 @@ export function concatOnce<T>(iterators: IteratorLike<IteratorLike<T>>): Iterato
 export function prependOnce<T>(a: IteratorLike<T>): (b: IteratorLike<T>) => Iterator<T> {
     return b => concatOnce([a, b]);
 }
+
+export function appendOnce<T>(b: IteratorLike<T>): (a: IteratorLike<T>) => Iterator<T> {
+    return a => concatOnce([a, b]);
+}

@@ -3,6 +3,7 @@ import {
     allOnce,
     andOnce,
     anyOnce,
+    appendOnce,
     averageOnce,
     concatOnce,
     containsOnce,
@@ -384,4 +385,13 @@ test("prependOnce", t => {
     );
     t.deepEqual(toArrayOnce(prependOnce(iterator<number>([]))(iterator([4, 5, 6]))), [4, 5, 6]);
     t.deepEqual(toArrayOnce(prependOnce(iterator([1, 2, 3]))(iterator([]))), [1, 2, 3]);
+});
+
+test("appendOnce", t => {
+    t.deepEqual(
+        toArrayOnce(appendOnce(iterator([4, 5, 6]))(iterator([1, 2, 3]))),
+        [1, 2, 3, 4, 5, 6]
+    );
+    t.deepEqual(toArrayOnce(appendOnce(iterator<number>([]))(iterator([1, 2, 3]))), [1, 2, 3]);
+    t.deepEqual(toArrayOnce(appendOnce(iterator([4, 5, 6]))(iterator([]))), [4, 5, 6]);
 });
