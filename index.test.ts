@@ -31,6 +31,7 @@ import {
     maximumOnce,
     minimumByOnce,
     minimumOnce,
+    noneNullOnce,
     notEmptyOnce,
     notEqualOnce,
     onlyOnce,
@@ -406,4 +407,11 @@ test("concatMapOnce", t => {
         "5",
         "6"
     ]);
+});
+
+test("noneNullOnce", t => {
+    t.deepEqual(noneNullOnce(iterator([1, 2, 3])), [1, 2, 3]);
+    t.is(noneNullOnce(iterator([1, null, 3])), null);
+    t.is(noneNullOnce(iterator([undefined, 2, 3])), null);
+    t.deepEqual(noneNullOnce(iterator([])), []);
 });

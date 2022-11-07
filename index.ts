@@ -880,3 +880,18 @@ export function concatMapOnceFn<T, U>(
 ): (iterator: IteratorLike<T>) => Iterator<U> {
     return iterator => concatMapOnce(iterator, f);
 }
+
+export function noneNullOnce<T>(iterator: IteratorLike<T | null | undefined>): T[] | null {
+    const array: T[] = [];
+    const it = toIterator(iterator);
+    let element = it.next();
+    while (element.done !== true) {
+        if (element.value == null) {
+            return null;
+        } else {
+            array.push(element.value);
+        }
+        element = it.next();
+    }
+    return array;
+}
