@@ -34,6 +34,7 @@ import {
     onlyOnce,
     orOnce,
     prefixMatchOnce,
+    prependOnce,
     productOnce,
     pushOnce,
     removeFirstOnce,
@@ -374,4 +375,13 @@ test("concatOnce", t => {
         [1, 2, 3, 4, 5]
     );
     t.deepEqual(toArrayOnce(concatOnce(iterator([iterator([]), iterator([])]))), []);
+});
+
+test("prependOnce", t => {
+    t.deepEqual(
+        toArrayOnce(prependOnce(iterator([1, 2, 3]))(iterator([4, 5, 6]))),
+        [1, 2, 3, 4, 5, 6]
+    );
+    t.deepEqual(toArrayOnce(prependOnce(iterator<number>([]))(iterator([4, 5, 6]))), [4, 5, 6]);
+    t.deepEqual(toArrayOnce(prependOnce(iterator([1, 2, 3]))(iterator([]))), [1, 2, 3]);
 });
