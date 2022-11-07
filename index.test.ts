@@ -5,6 +5,7 @@ import {
     anyOnce,
     appendOnce,
     averageOnce,
+    concatMapOnce,
     concatOnce,
     containsOnce,
     dropOnce,
@@ -394,4 +395,15 @@ test("appendOnce", t => {
     );
     t.deepEqual(toArrayOnce(appendOnce(iterator<number>([]))(iterator([1, 2, 3]))), [1, 2, 3]);
     t.deepEqual(toArrayOnce(appendOnce(iterator([4, 5, 6]))(iterator([]))), [4, 5, 6]);
+});
+
+test("concatMapOnce", t => {
+    t.deepEqual(toArrayOnce(concatMapOnce(iterator(["1,2,3", "4,5,6"]), s => s.split(","))), [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6"
+    ]);
 });

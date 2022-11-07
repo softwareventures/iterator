@@ -867,3 +867,16 @@ export function prependOnce<T>(a: IteratorLike<T>): (b: IteratorLike<T>) => Iter
 export function appendOnce<T>(b: IteratorLike<T>): (a: IteratorLike<T>) => Iterator<T> {
     return a => concatOnce([a, b]);
 }
+
+export function concatMapOnce<T, U>(
+    iterator: IteratorLike<T>,
+    f: (element: T, index: number) => IteratorLike<U>
+): Iterator<U> {
+    return concatOnce(mapOnce(iterator, f));
+}
+
+export function concatMapOnceFn<T, U>(
+    f: (element: T, index: number) => IteratorLike<U>
+): (iterator: IteratorLike<T>) => Iterator<U> {
+    return iterator => concatMapOnce(iterator, f);
+}
