@@ -42,6 +42,7 @@ import {
     pushOnce,
     removeFirstOnce,
     removeOnce,
+    scan1Once,
     scanOnce,
     sliceOnce,
     sumOnce,
@@ -423,4 +424,8 @@ test("scanOnce", t => {
         toArrayOnce(scanOnce(iterator(["a", "b", "c"]), (a, e, i) => `${a} ${i} ${e}`, "_")),
         ["_ 0 a", "_ 0 a 1 b", "_ 0 a 1 b 2 c"]
     );
+});
+
+test("scan1Once", t => {
+    t.deepEqual(toArrayOnce(scan1Once(iterator([1, 2, 3]), (a, e, i) => a + e * i)), [1, 3, 9]);
 });

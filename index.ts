@@ -925,3 +925,41 @@ export function scanOnceFn<T, U>(
 ): (iterator: IteratorLike<T>) => Iterator<U> {
     return iterator => scanOnce(iterator, f, initial);
 }
+
+export function scan1Once<T>(
+    iterator: IteratorLike<T>,
+    f: (accumulator: T, element: T, index: number) => T
+): Iterator<T> {
+    const it = toIterator(iterator);
+    let i = 1;
+    const first = (): IteratorResult<T> => {
+        const element = it.next();
+        if (element.done === true) {
+            next = after;
+            return after();
+        } else {
+            next = during(element.value);
+            return {value: element.value};
+        }
+    };
+    const during = (accumulator: T) => (): IteratorResult<T> => {
+        const element = it.next();
+        if (element.done === true) {
+            next = after;
+            return after();
+        } else {
+            const value = f(accumulator, element.value, i++);
+            next = during(value);
+            return {value};
+        }
+    };
+    const after = (): IteratorResult<T> => ({done: true, value: undefined});
+    let next = first;
+    return {next: () => next()};
+}
+
+export function scan1OnceFn<T>(
+    f: (accumulator: T, element: T, index: number) => T
+): (iterator: IteratorLike<T>) => Iterator<T> {
+    return iterator => scan1Once(iterator, f);
+}
