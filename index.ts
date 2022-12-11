@@ -990,3 +990,27 @@ export function pairwiseOnce<T>(iterator: IteratorLike<T>): Iterator<readonly [T
     let next = before;
     return {next: () => next()};
 }
+
+export function zipOnce<T, U>(a: IteratorLike<T>, b: IteratorLike<U>): Iterator<readonly [T, U]> {
+    const ait = toIterator(a);
+    const bit = toIterator(b);
+    const during = (): IteratorResult<readonly [T, U]> => {
+        const aElement = ait.next();
+        const bElement = bit.next();
+        if (aElement.done === true || bElement.done === true) {
+            next = after;
+            return after();
+        } else {
+            return {value: [aElement.value, bElement.value]};
+        }
+    };
+    const after = (): IteratorResult<readonly [T, U]> => ({done: true, value: undefined});
+    let next = during;
+    return {next: () => next()};
+}
+
+export function zipOnceFn<T, U>(
+    b: IteratorLike<U>
+): (a: IteratorLike<T>) => Iterator<readonly [T, U]> {
+    return a => zipOnce(a, b);
+}

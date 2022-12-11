@@ -52,7 +52,8 @@ import {
     takeUntilOnce,
     takeWhileOnce,
     toArrayOnce,
-    unshiftOnce
+    unshiftOnce,
+    zipOnce
 } from "./index";
 
 test("iterator", t => {
@@ -440,5 +441,13 @@ test("pairwiseOnce", t => {
         [2, 3],
         [3, 4],
         [4, 5]
+    ]);
+});
+
+test("zipOnce", t => {
+    t.deepEqual(toArrayOnce(zipOnce(iterator([1, 2, 3]), iterator([6, 5, 4, 3, 2, 1]))), [
+        [1, 6],
+        [2, 5],
+        [3, 4]
     ]);
 });
