@@ -963,3 +963,30 @@ export function scan1OnceFn<T>(
 ): (iterator: IteratorLike<T>) => Iterator<T> {
     return iterator => scan1Once(iterator, f);
 }
+
+export function pairwiseOnce<T>(iterator: IteratorLike<T>): Iterator<readonly [T, T]> {
+    const it = toIterator(iterator);
+    const before = (): IteratorResult<readonly [T, T]> => {
+        const element = it.next();
+        if (element.done === true) {
+            next = after;
+            return after();
+        } else {
+            next = during(element.value);
+            return next();
+        }
+    };
+    const during = (previous: T) => (): IteratorResult<readonly [T, T]> => {
+        const element = it.next();
+        if (element.done === true) {
+            next = after;
+            return after();
+        } else {
+            next = during(element.value);
+            return {value: [previous, element.value]};
+        }
+    };
+    const after = (): IteratorResult<readonly [T, T]> => ({done: true, value: undefined});
+    let next = before;
+    return {next: () => next()};
+}

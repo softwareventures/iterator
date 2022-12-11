@@ -36,6 +36,7 @@ import {
     notEqualOnce,
     onlyOnce,
     orOnce,
+    pairwiseOnce,
     prefixMatchOnce,
     prependOnce,
     productOnce,
@@ -428,4 +429,16 @@ test("scanOnce", t => {
 
 test("scan1Once", t => {
     t.deepEqual(toArrayOnce(scan1Once(iterator([1, 2, 3]), (a, e, i) => a + e * i)), [1, 3, 9]);
+});
+
+test("pairwiseOnce", t => {
+    t.deepEqual(toArrayOnce(pairwiseOnce(iterator([]))), []);
+    t.deepEqual(toArrayOnce(pairwiseOnce(iterator([1]))), []);
+    t.deepEqual(toArrayOnce(pairwiseOnce(iterator([1, 2]))), [[1, 2]]);
+    t.deepEqual(toArrayOnce(pairwiseOnce(iterator([1, 2, 3, 4, 5]))), [
+        [1, 2],
+        [2, 3],
+        [3, 4],
+        [4, 5]
+    ]);
 });
