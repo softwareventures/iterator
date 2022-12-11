@@ -42,6 +42,7 @@ import {
     pushOnce,
     removeFirstOnce,
     removeOnce,
+    scanOnce,
     sliceOnce,
     sumOnce,
     tailOnce,
@@ -414,4 +415,12 @@ test("noneNullOnce", t => {
     t.is(noneNullOnce(iterator([1, null, 3])), null);
     t.is(noneNullOnce(iterator([undefined, 2, 3])), null);
     t.deepEqual(noneNullOnce(iterator([])), []);
+});
+
+test("scanOnce", t => {
+    t.deepEqual(toArrayOnce(scanOnce(iterator([1, 2, 3]), (a, e, i) => a + e * i, 0)), [0, 2, 8]);
+    t.deepEqual(
+        toArrayOnce(scanOnce(iterator(["a", "b", "c"]), (a, e, i) => `${a} ${i} ${e}`, "_")),
+        ["_ 0 a", "_ 0 a 1 b", "_ 0 a 1 b 2 c"]
+    );
 });

@@ -895,3 +895,33 @@ export function noneNullOnce<T>(iterator: IteratorLike<T | null | undefined>): T
     }
     return array;
 }
+
+export function scanOnce<T, U>(
+    iterator: IteratorLike<T>,
+    f: (accumulator: U, element: T, index: number) => U,
+    initial: U
+): Iterator<U> {
+    const it = toIterator(iterator);
+    let i = 0;
+    let accumulator = initial;
+    const during = (): IteratorResult<U> => {
+        const element = it.next();
+        if (element.done === true) {
+            next = after;
+            return after();
+        } else {
+            accumulator = f(accumulator, element.value, i++);
+            return {value: accumulator};
+        }
+    };
+    const after = (): IteratorResult<U> => ({done: true, value: undefined});
+    let next = during;
+    return {next: () => next()};
+}
+
+export function scanOnceFn<T, U>(
+    f: (accumulator: U, element: T, index: number) => U,
+    initial: U
+): (iterator: IteratorLike<T>) => Iterator<U> {
+    return iterator => scanOnce(iterator, f, initial);
+}
