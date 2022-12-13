@@ -1,5 +1,4 @@
 {
-  "private": true,
   "name": "@softwareventures/iterator",
   "version": "0.0.0-development",
   "description": "Pure functional Iterator traversal",
@@ -140,5 +139,8 @@
   "release": {
     "extends": "@softwareventures/semantic-release-config"
   },
-  "packageManager": "yarn@3.2.4"
+  "packageManager": "yarn@3.2.4",
+  "publishConfig": {
+    "access": "public"
+  }
 }
