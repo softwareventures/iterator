@@ -1055,3 +1055,21 @@ export function keyFirstByOnceFn<TKey, TElement>(
 ): (iterator: IteratorLike<TElement>) => Map<TKey, TElement> {
     return iterator => keyFirstByOnce(iterator, f);
 }
+
+export function keyLastByOnce<TKey, TElement>(
+    iterator: IteratorLike<TElement>,
+    f: (element: TElement, index: number) => TKey
+): Map<TKey, TElement> {
+    const it = toIterator(iterator);
+    const map = new Map<TKey, TElement>();
+    for (let i = 0, element = it.next(); element.done !== true; ++i, element = it.next()) {
+        map.set(f(element.value, i), element.value);
+    }
+    return map;
+}
+
+export function keyLastByOnceFn<TKey, TElement>(
+    f: (element: TElement, index: number) => TKey
+): (iterator: IteratorLike<TElement>) => Map<TKey, TElement> {
+    return iterator => keyLastByOnce(iterator, f);
+}

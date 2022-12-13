@@ -27,6 +27,7 @@ import {
     iterator,
     keyByOnce,
     keyFirstByOnce,
+    keyLastByOnce,
     lastOnce,
     mapOnce,
     maximumByOnce,
@@ -467,5 +468,13 @@ test("keyFirstByOnce", t => {
     t.deepEqual(Array.from(map.entries()), [
         ["odd", 1],
         ["even", 4]
+    ]);
+});
+
+test("keyLastByOnce", t => {
+    const map = keyLastByOnce(iterator([1, 3, 4, 2, 5, 6]), e => (e % 2 === 0 ? "even" : "odd"));
+    t.deepEqual(Array.from(map.entries()), [
+        ["odd", 5],
+        ["even", 6]
     ]);
 });
