@@ -25,6 +25,7 @@ import {
     indexOnce,
     initialOnce,
     iterator,
+    keyByOnce,
     lastOnce,
     mapOnce,
     maximumByOnce,
@@ -449,5 +450,13 @@ test("zipOnce", t => {
         [1, 6],
         [2, 5],
         [3, 4]
+    ]);
+});
+
+test("keyByOnce", t => {
+    const map = keyByOnce(iterator([1, 3, 4, 2, 5, 6]), e => (e % 2 === 0 ? "even" : "odd"));
+    t.deepEqual(Array.from(map.entries()), [
+        ["odd", [1, 3, 5]],
+        ["even", [4, 2, 6]]
     ]);
 });

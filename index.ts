@@ -1014,3 +1014,23 @@ export function zipOnceFn<T, U>(
 ): (a: IteratorLike<T>) => Iterator<readonly [T, U]> {
     return a => zipOnce(a, b);
 }
+
+export function keyByOnce<TKey, TElement>(
+    iterator: IteratorLike<TElement>,
+    f: (element: TElement, index: number) => TKey
+): Map<TKey, readonly TElement[]> {
+    const it = toIterator(iterator);
+    const map = new Map<TKey, TElement[]>();
+    for (let i = 0, element = it.next(); element.done !== true; ++i, element = it.next()) {
+        const key = f(element.value, i);
+        const entries = map.get(key) ?? [];
+        map.set(key, [...entries, element.value]);
+    }
+    return map;
+}
+
+export function keyByOnceFn<TKey, TElement>(
+    f: (element: TElement, index: number) => TKey
+): (iterator: Iterator<TElement>) => Map<TKey, readonly TElement[]> {
+    return iterator => keyByOnce(iterator, f);
+}
