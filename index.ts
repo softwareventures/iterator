@@ -1093,3 +1093,24 @@ export function mapKeyByOnceFn<TKey, TElement, TNewElement>(
 ): (iterator: IteratorLike<TElement>) => Map<TKey, readonly TNewElement[]> {
     return iterator => mapKeyByOnce(iterator, f);
 }
+
+export function mapKeyFirstByOnce<TKey, TElement, TNewElement>(
+    iterator: IteratorLike<TElement>,
+    f: (element: TElement, index: number) => readonly [TKey, TNewElement]
+): Map<TKey, TNewElement> {
+    const it = toIterator(iterator);
+    const map = new Map<TKey, TNewElement>();
+    for (let i = 0, element = it.next(); element.done !== true; ++i, element = it.next()) {
+        const [key, value] = f(element.value, i);
+        if (!map.has(key)) {
+            map.set(key, value);
+        }
+    }
+    return map;
+}
+
+export function mapKeyFirstByOnceFn<TKey, TElement, TNewElement>(
+    f: (element: TElement, index: number) => readonly [TKey, TNewElement]
+): (iterator: IteratorLike<TElement>) => Map<TKey, TNewElement> {
+    return iterator => mapKeyFirstByOnce(iterator, f);
+}
