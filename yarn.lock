@@ -840,9 +840,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@softwareventures/eslint-config@npm:7.0.0":
-  version: 7.0.0
-  resolution: "@softwareventures/eslint-config@npm:7.0.0"
+"@softwareventures/eslint-config@npm:7.1.0":
+  version: 7.1.0
+  resolution: "@softwareventures/eslint-config@npm:7.1.0"
   dependencies:
     tslib: ^2.3.1
   peerDependencies:
@@ -853,9 +853,9 @@ __metadata:
     eslint-plugin-import: ^2.25.2
     eslint-plugin-jsdoc: ^37.0.3 || ^38.0.0 || ^39.0.0
     eslint-plugin-prefer-arrow: ^1.2.3
-    eslint-plugin-sonarjs: ^0.10.0 || ^0.11.0 || ^0.12.0 || ^0.13.0 || ^0.14.0 || ^0.15.0
+    eslint-plugin-sonarjs: ^0.10.0 || ^0.11.0 || ^0.12.0 || ^0.13.0 || ^0.14.0 || ^0.15.0 || ^0.16.0
     typescript: ^3.8.3 || ^4.0.0
-  checksum: 3904777fddd24c0367f72734f60c52390c5cf53a95a6cca1398aa2a0841edf4680db64cf848655e1f9bbac8eb8bd66d027bad498eee6990dfffad556034d768e
+  checksum: e1cb8886a7fca8c5364d3ad1893b88eb7e793806d8c4d7f359ee2ad1f0390e12fbe03bd5a4bcd13896436f55793ff08b04015dbcf5dd43b4e9ce2ca25da3b906
   languageName: node
   linkType: hard
 
@@ -866,7 +866,7 @@ __metadata:
     "@commitlint/cli": 17.3.0
     "@commitlint/config-conventional": 17.3.0
     "@commitlint/cz-commitlint": 17.3.0
-    "@softwareventures/eslint-config": 7.0.0
+    "@softwareventures/eslint-config": 7.1.0
     "@softwareventures/nullable": ^3.0.0
     "@softwareventures/ordered": ^2.0.0
     "@softwareventures/precise-commits": 2.0.24
