@@ -819,14 +819,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@softwareventures/array@npm:5.3.0":
-  version: 5.3.0
-  resolution: "@softwareventures/array@npm:5.3.0"
+"@softwareventures/array@npm:6.0.3":
+  version: 6.0.3
+  resolution: "@softwareventures/array@npm:6.0.3"
   dependencies:
-    "@softwareventures/nullable": ^1.0.0 || ^2.0.0
-    "@softwareventures/ordered": ^1.1.0
+    "@softwareventures/nullable": ^1.0.0 || ^2.0.0 || ^3.0.0
+    "@softwareventures/ordered": ^1.1.0 || ^2.0.0
     tslib: ^2.0.0
-  checksum: 65415a208a5957c2bba25432519fcf1d170eda9dcc5f157b79d9759ec6624b337a768300522f38a131c7052b8333312598b68760d06bdcc1758d0d9dae0b7b8e
+  checksum: 2b5154c84dd1fbd30fafbd6237e39408fd2b6586b84fa99949774661275582973cb8ec0b8f04d3f5cf9ed460edd965d05eb63d002f5ec76ca5fc2d1a40426a69
   languageName: node
   linkType: hard
 
@@ -859,7 +859,7 @@ __metadata:
     "@softwareventures/eslint-config": 7.1.0
     "@softwareventures/nullable": ^3.0.0
     "@softwareventures/ordered": ^2.0.0
-    "@softwareventures/precise-commits": 2.0.24
+    "@softwareventures/precise-commits": 3.0.6
     "@softwareventures/prettier-config": 4.0.0
     "@softwareventures/semantic-release-config": 3.1.0
     "@softwareventures/tsconfig": 7.0.0
@@ -886,34 +886,16 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@softwareventures/nullable@npm:2.0.0, @softwareventures/nullable@npm:^1.0.0 || ^2.0.0":
-  version: 2.0.0
-  resolution: "@softwareventures/nullable@npm:2.0.0"
+"@softwareventures/nullable@npm:3.1.0, @softwareventures/nullable@npm:^1.0.0 || ^2.0.0 || ^3.0.0, @softwareventures/nullable@npm:^3.0.0":
+  version: 3.1.0
+  resolution: "@softwareventures/nullable@npm:3.1.0"
   dependencies:
-    tslib: 2.3.0
-  checksum: cdfe2d5cd35e6eb878cdcdcf8626d02f38a152f5529bce6b473d20bbded5ba5e16e851016de17dcc4fcec6fa1430032b8b1e4345504caa09ed178ce7c1733d90
+    tslib: 2.4.1
+  checksum: 04ba15dbbfa2e64f35a3a4bc62b0ed01da9cd57871240f355e15b54834bbb8873db00748f05dda14f9e320f638cee97ec6b801177d0a812bac12be8ab2272424
   languageName: node
   linkType: hard
 
-"@softwareventures/nullable@npm:^3.0.0":
-  version: 3.0.0
-  resolution: "@softwareventures/nullable@npm:3.0.0"
-  dependencies:
-    tslib: 2.4.0
-  checksum: 19775dce03995984daef0a8c6b81b4e9f8f9ab770d6b09d815968b9ac2be368a2f144aa68201b002652880ce3587de3a8267f457882682abe8e34629745f2df8
-  languageName: node
-  linkType: hard
-
-"@softwareventures/ordered@npm:^1.1.0":
-  version: 1.1.0
-  resolution: "@softwareventures/ordered@npm:1.1.0"
-  dependencies:
-    tslib: ^1.9.3 || ^2.0.0 || ^2.1.0
-  checksum: a68d969b9992125f338153f0070beeb60d25e3e91735f8229da900f9a5f20fc07ef7387476b87acb95f955172826006f1154d39fa5c9974089a6edba7b6e29bd
-  languageName: node
-  linkType: hard
-
-"@softwareventures/ordered@npm:^2.0.0":
+"@softwareventures/ordered@npm:^1.1.0 || ^2.0.0, @softwareventures/ordered@npm:^2.0.0":
   version: 2.0.0
   resolution: "@softwareventures/ordered@npm:2.0.0"
   dependencies:
@@ -922,25 +904,25 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@softwareventures/precise-commits@npm:2.0.24":
-  version: 2.0.24
-  resolution: "@softwareventures/precise-commits@npm:2.0.24"
+"@softwareventures/precise-commits@npm:3.0.6":
+  version: 3.0.6
+  resolution: "@softwareventures/precise-commits@npm:3.0.6"
   dependencies:
-    "@softwareventures/array": 5.3.0
-    "@softwareventures/nullable": 2.0.0
+    "@softwareventures/array": 6.0.3
+    "@softwareventures/nullable": 3.1.0
     execa: 5.1.1
     find-up: 5.0.0
-    glob: 7.2.0
+    glob: 8.0.3
     ignore: 5.2.0
     mri: 1.2.0
     ora: 5.4.1
-    tslib: 2.4.0
+    tslib: 2.4.1
     unknown: 0.2.5
   peerDependencies:
     prettier: ">=1.8.0"
   bin:
     precise-commits: lib/cli.js
-  checksum: 100230a048d46fbb48aa039420236d5e0441a08f46c7d87022fa5f5e9ab0cec04d8dfb13ae763ff2ce01349a2bd21599fbf4346822a3ef9f2920669f2bff92d1
+  checksum: c452be6b900947a9fb0ca1b125c1e72459dfecb03381568469fab64a07f44e1b13a07bb54b9b88c8c54fde1aaceb0293e53ccc4dbf3a1d5d1addc0136a6a928d
   languageName: node
   linkType: hard
 
@@ -3434,20 +3416,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"glob@npm:7.2.0":
-  version: 7.2.0
-  resolution: "glob@npm:7.2.0"
-  dependencies:
-    fs.realpath: ^1.0.0
-    inflight: ^1.0.4
-    inherits: 2
-    minimatch: ^3.0.4
-    once: ^1.3.0
-    path-is-absolute: ^1.0.0
-  checksum: 78a8ea942331f08ed2e055cb5b9e40fe6f46f579d7fd3d694f3412fe5db23223d29b7fee1575440202e9a7ff9a72ab106a39fee39934c7bedafe5e5f8ae20134
-  languageName: node
-  linkType: hard
-
 "glob@npm:7.2.3, glob@npm:^7.1.3, glob@npm:^7.1.4":
   version: 7.2.3
   resolution: "glob@npm:7.2.3"
@@ -3462,7 +3430,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"glob@npm:^8.0.1":
+"glob@npm:8.0.3, glob@npm:^8.0.1":
   version: 8.0.3
   resolution: "glob@npm:8.0.3"
   dependencies:
@@ -7138,13 +7106,6 @@ __metadata:
     minimist: ^1.2.6
     strip-bom: ^3.0.0
   checksum: 8afa01c673ebb4782ba53d3a12df97fa837ce524f8ad38ee4e2b2fd57f5ac79abc21c574e9e9eb014d93efe7fe8214001b96233b5c6ea75bd1ea82afe17a4c6d
-  languageName: node
-  linkType: hard
-
-"tslib@npm:2.3.0":
-  version: 2.3.0
-  resolution: "tslib@npm:2.3.0"
-  checksum: 8869694c26e4a7b56d449662fd54a4f9ba872c889d991202c74462bd99f10e61d5bd63199566c4284c0f742277736292a969642cc7b590f98727a7cae9529122
   languageName: node
   linkType: hard
 
