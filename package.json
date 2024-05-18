@@ -77,8 +77,7 @@
     "fix": "tsc --noEmit && eslint . --fix && prettier --write .",
     "postinstall": "husky install",
     "lint": "tsc --noEmit && eslint . && prettier --check .",
-    "prepack": "tsc && pinst --disable",
-    "postpack": "pinst --enable",
+    "prepack": "tsc",
     "test": "ava"
   },
   "engines": {
