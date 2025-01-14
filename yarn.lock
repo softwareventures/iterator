@@ -1007,7 +1007,7 @@ __metadata:
     "@softwareventures/ordered": ^2.0.0
     "@softwareventures/precise-commits": 3.0.35
     "@softwareventures/prettier-config": 4.0.0
-    "@softwareventures/semantic-release-config": 5.0.0
+    "@softwareventures/semantic-release-config": 5.1.0
     "@softwareventures/tsconfig": 7.3.0
     "@types/node": 17.0.45
     "@typescript-eslint/eslint-plugin": 5.62.0
@@ -1084,17 +1084,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@softwareventures/semantic-release-config@npm:5.0.0":
-  version: 5.0.0
-  resolution: "@softwareventures/semantic-release-config@npm:5.0.0"
+"@softwareventures/semantic-release-config@npm:5.1.0":
+  version: 5.1.0
+  resolution: "@softwareventures/semantic-release-config@npm:5.1.0"
   dependencies:
-    tslib: 2.6.2
+    tslib: 2.8.1
   peerDependencies:
     conventional-changelog-conventionalcommits: ^4.6.3 || ^5.0.0 || ^6.0.0 || ^7.0.0
     pinst: ">= 2.1.6"
     semantic-release: ^17.0.7 || ^18.0.0 || ^19.0.0 || ^20.0.0 || ^21.0.0 || ^22.0.0 || ^23.0.0
     semantic-release-pinst: ^1.0.0
-  checksum: 0332af975f05d4c88d069ff5eae2a7a65616b86a114c2fcf31982ea574811e04a8b668557d5e805987d7f3c974b1fb4269b85d4473541e863568cd7a1304da58
+  checksum: b2af50c0f6f39660b4f33100c6c432657fe8cb5643e315badb051a96c439b0819fdff13d95712b6f6c355c4211653f01a104ac8f5126d4286f60056ab4cf392a
   languageName: node
   linkType: hard
 
@@ -7909,10 +7909,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tslib@npm:2.7.0, tslib@npm:^1.9.3 || ^2.0.0 || ^2.1.0, tslib@npm:^2.0.0, tslib@npm:^2.1.0, tslib@npm:^2.3.1, tslib@npm:^2.6.2":
+"tslib@npm:2.7.0":
   version: 2.7.0
   resolution: "tslib@npm:2.7.0"
   checksum: 1606d5c89f88d466889def78653f3aab0f88692e80bb2066d090ca6112ae250ec1cfa9dbfaab0d17b60da15a4186e8ec4d893801c67896b277c17374e36e1d28
+  languageName: node
+  linkType: hard
+
+"tslib@npm:2.8.1, tslib@npm:^1.9.3 || ^2.0.0 || ^2.1.0, tslib@npm:^2.0.0, tslib@npm:^2.1.0, tslib@npm:^2.3.1, tslib@npm:^2.6.2":
+  version: 2.8.1
+  resolution: "tslib@npm:2.8.1"
+  checksum: e4aba30e632b8c8902b47587fd13345e2827fa639e7c3121074d5ee0880723282411a8838f830b55100cbe4517672f84a2472667d355b81e8af165a55dc6203a
   languageName: node
   linkType: hard
 
