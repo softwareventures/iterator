@@ -991,22 +991,22 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@softwareventures/eslint-config@npm:7.10.0":
-  version: 7.10.0
-  resolution: "@softwareventures/eslint-config@npm:7.10.0"
+"@softwareventures/eslint-config@npm:9.2.3":
+  version: 9.2.3
+  resolution: "@softwareventures/eslint-config@npm:9.2.3"
   dependencies:
     tslib: ^2.3.1
   peerDependencies:
-    "@typescript-eslint/eslint-plugin": ^5.3.0 || ^6.0.0 || ^7.0.0
-    "@typescript-eslint/parser": ^5.3.0 || ^6.0.0 || ^7.0.0
-    eslint: ^7.0.0 || ^8.0.0
-    eslint-config-prettier: ^8.3.0 || ^9.0.0
+    "@typescript-eslint/eslint-plugin": ^8.0.0
+    "@typescript-eslint/parser": ^8.0.0
+    eslint: ^8.0.0
+    eslint-config-prettier: ^8.3.0 || ^9.0.0 || ^10.0.0
     eslint-plugin-import: ^2.25.2
-    eslint-plugin-jsdoc: ^37.0.3 || ^38.0.0 || ^39.0.0 || ^40.0.0 || ^41.0.0 || ^42.0.0 || ^43.0.0 || ^44.0.0 || ^45.0.0 || ^46.0.0 || ^47.0.0 || ^48.0.0 || ^49.0.0 || ^50.0.0
+    eslint-plugin-jsdoc: ^37.0.3 || ^38.0.0 || ^39.0.0 || ^40.0.0 || ^41.0.0 || ^42.0.0 || ^43.0.0 || ^44.0.0 || ^45.0.0 || ^46.0.0 || ^47.0.0 || ^48.0.0 || ^49.0.0 || ^50.0.0 || ^51.0.0 || ^52.0.0 || ^54.0.0 || ^55.0.0 || ^56.0.0 || ^57.0.0 || ^58.0.0 || ^59.0.0 || ^60.0.0
     eslint-plugin-prefer-arrow: ^1.2.3
     eslint-plugin-sonarjs: ^0.10.0 || ^0.11.0 || ^0.12.0 || ^0.13.0 || ^0.14.0 || ^0.15.0 || ^0.16.0 || ^0.17.0 || ^0.18.0 || ^0.19.0 || ^0.20.0 || ^0.21.0 || ^0.22.0 || ^0.23.0 || ^0.24.0 || ^0.25.0 || ^1.0.0 || ^2.0.0 || ^3.0.0
-    typescript: ^3.8.3 || ^4.0.0 || ^5.0.0
-  checksum: f6348559f300692b68fc9016eb6f8f69ebaafd17afa07d74666b10565dc51df16cdf394c766c535eb9e072bc6ae4e3211fc5967317b64304106542f2f390adde
+    typescript: ^4.8.4 || ^5.0.0
+  checksum: 51d3c5f6e9b06251f6f24b1977ea953afea7d51f988ae16a54a7a2eb98a6990d8b4b4a8648a1597fc2e70c03f8328dc9717b8267e9333ae92d90714880e02dae
   languageName: node
   linkType: hard
 
@@ -1017,7 +1017,7 @@ __metadata:
     "@commitlint/cli": 17.8.1
     "@commitlint/config-conventional": 17.8.1
     "@commitlint/cz-commitlint": 17.8.1
-    "@softwareventures/eslint-config": 7.10.0
+    "@softwareventures/eslint-config": 9.2.3
     "@softwareventures/nullable": ^3.0.0
     "@softwareventures/ordered": ^2.0.0
     "@softwareventures/precise-commits": 3.0.36
